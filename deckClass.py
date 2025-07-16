@@ -1,4 +1,6 @@
 import cardClass
+import writeToFile
+
 #Define class Deck
 class Deck:
     def __init__(self, name, card):
@@ -8,12 +10,3 @@ class Deck:
 cards = cardClass.cards
 deck = Deck("test", cards)
 
-print("Write first one")
-wordOne = input()
-print("Write second one")
-wordTwo = input()
-
-cardClass.addCard(deck.cards, wordOne, wordTwo)
-
-for card in deck.cards:
-    print(card.wordOne + " | " + card.wordTwo)

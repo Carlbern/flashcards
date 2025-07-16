@@ -3,10 +3,6 @@ class Card:
         self.wordOne = wordOne
         self.wordTwo = wordTwo
 
-
-def addCard(cards, wordOne, wordTwo):
-    tempCard = Card(wordOne, wordTwo)
-    cards.append(tempCard)
     
 
 cards = []

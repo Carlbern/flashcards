@@ -1,0 +1,3 @@
+Bonjour|Hej
+Au revoir|Hej Då
+1|2

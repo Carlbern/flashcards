@@ -1,3 +1,5 @@
-def appendFile(deck, card):
-    with open(deck.name+".txt", "a") as f:        
-            f.write(card.wordOne + "|" + card.wordTwo + "\n")
+import deckClass
+
+def appendFile(wordOne, wordTwo):
+    with open(deckClass.deck.name+".txt", "a") as f:        
+            f.write(wordOne + "|" + wordTwo + "\n")

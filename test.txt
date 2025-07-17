@@ -1,5 +1,4 @@
-Bonjour|Hej
-Au revoir|Hej Då
-1|2
-1|2
-2|3
+Bonjour Hej
+Au revoir Hej Då
+Merci Tack
+Tableau Tavla

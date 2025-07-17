@@ -7,8 +7,6 @@ class Card:
 
 cards = []
 
-cards.append(Card("Bonjour","Hej"))
-cards.append(Card("Au revoir","Hej Då"))
 
 
 

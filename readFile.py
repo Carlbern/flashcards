@@ -6,8 +6,7 @@ def readFile(deck):
     file = open("test.txt", "r")
 
     for line in file:
-        lineWords = line.split()
-        print(line.split()[0])
+        lineWords = line.split("|")
         tempCard = cardClass.Card(lineWords[0], lineWords[1])
         #tempCard.wordOne = lineWords[0]
         #tempCard.wordTwo = lineWords[1]

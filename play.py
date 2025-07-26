@@ -1,9 +1,8 @@
 import random
-import deckClass
-import readFile
+from colorama import Fore
 import os
 clear = lambda: os.system('clear')
-readFile.readFile(deckClass.deck)
+
 
      
 def play(deck):
@@ -12,23 +11,54 @@ def play(deck):
     random.shuffle(tempCards)
 
     for card in tempCards:
+
+        ##CREATES ASTERISKS FOR BORDER##
+        asterisks = ""
+        i = 0
+        while i < len(card.wordOne) + 6:
+            if i == 0 or i == (len(card.wordOne) + 5):
+                asterisks+=" "
+            else:
+                asterisks+="*"
+            i+=1
+                
         clear()
-        print(card.wordOne)
-        inp = input()
+        print(Fore.WHITE + asterisks)
+        print(f"** {card.wordOne} **")
+        print(asterisks)
+        inp = input("Guess: ")
 
-        clear()
-     
-        print(card.wordTwo)
+        ##CREATES ASTERISKS FOR BORDER##
+        asterisks = ""
+        i = 0
+        while i < len(card.wordTwo) + 6:
+            if i == 0 or i == (len(card.wordTwo) + 5):
+                asterisks+=" "
+            else:
+                asterisks+="*"
+            i+=1
 
-        print(inp.lower() + " " + card.wordTwo.lower())
-        print(inp.lower() == card.wordTwo.lower())
-
-        if inp.lower() == card.wordTwo.lower():
-            print("här")
-            points += 1
         
-        print(points)
-        hold = input()
+        if inp.lower() == card.wordTwo.lower():
+            points += 1
+            clear()
+            print(Fore.GREEN + asterisks)
+            print(f"** {card.wordTwo} **")
+            print(asterisks)
+            hold = input("Press enter to continue.. ")
+        
+        else:
+            clear()
+            print(Fore.RED + asterisks)
+            print(f"** {card.wordTwo} **")
+            print(asterisks)
+            hold = input("Press enter to continue.. ")
+
+
+
+
+    clear()
+    print(Fore.WHITE + f"Game is over, you knew {points} answers")
 
        
            

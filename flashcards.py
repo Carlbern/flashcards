@@ -3,13 +3,15 @@ import addCard
 import deckClass
 import readFile
 import play
+from colorama import Fore
 import os
 clear = lambda: os.system('clear')
+readFile.readFile(deckClass.deck)
 
 while True:
     clear()
 
-    print("Welcome to FlashCards!\n")
+    print(Fore.WHITE + "Welcome to FlashCards!\n")
     print("Please choose an options below")
 
     print("1.Play deck")
@@ -22,7 +24,7 @@ while True:
 
 
 
-    selection = int(input())
+    selection = int(input("Select option: "))
     match selection:
         case 1:
             clear()

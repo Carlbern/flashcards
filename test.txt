@@ -5,4 +5,4 @@ Tableau|Tavla
 Ordinateur|Dator
 Ventilateur|Fläkt
 Fenetre|Fönster
-Lampe|Lampa
+Lampe|LampaLit Säng

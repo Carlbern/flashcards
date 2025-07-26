@@ -7,16 +7,30 @@ readFile.readFile(deckClass.deck)
 
      
 def play(deck):
-    tempCards = deck.cards
+    points = 0
+    tempCards = deck.cards.copy()
     random.shuffle(tempCards)
 
     for card in tempCards:
         clear()
         print(card.wordOne)
-        hold = input()
+        inp = input()
+
         clear()
+     
         print(card.wordTwo)
+
+        print(inp.lower() + " " + card.wordTwo.lower())
+        print(inp.lower() == card.wordTwo.lower())
+
+        if inp.lower() == card.wordTwo.lower():
+            print("här")
+            points += 1
+        
+        print(points)
         hold = input()
 
-play(deckClass.deck)
+       
+           
+
     

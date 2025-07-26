@@ -4,5 +4,5 @@ Merci|Tack
 Tableau|Tavla
 Ordinateur|Dator
 Ventilateur|Fläkt
-Lampe|Lampa
 Fenetre|Fönster
+Lampe|Lampa

@@ -2,11 +2,9 @@
 import addCard
 import deckClass
 import readFile
+import play
 import os
 clear = lambda: os.system('clear')
-readFile.readFile(deckClass.deck)
-
-
 
 while True:
     clear()
@@ -28,8 +26,7 @@ while True:
     match selection:
         case 1:
             clear()
-            for card in deckClass.deck.cards:
-                print(card.wordOne + " " + card.wordTwo)
+            play.play(deckClass.deck) 
 
             
             hold = input()

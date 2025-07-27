@@ -1,9 +1,8 @@
-import deckClass
 import cardClass
 
 
 def readFile(deck):
-    file = open("test.txt", "r")
+    file = open("decks/test.txt", "r")
 
     for line in file:
         line = line.strip() #Removes trailing whitespaces and newlines

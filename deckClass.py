@@ -1,5 +1,4 @@
 import cardClass
-import writeToFile
 
 
 #Define class Deck

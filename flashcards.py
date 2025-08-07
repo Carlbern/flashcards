@@ -13,7 +13,7 @@ while True:
     clear()
 
     print(Fore.WHITE + "Welcome to FlashCards!\n")
-    print("Please choose an options below")
+    print("Please choose an option below")
 
     print("1.Play deck")
     print("2.Add Card to deck")
@@ -41,15 +41,42 @@ while True:
             hold = input()
         case 2: #ADD CARD
             clear()
-            print("Write first word")
-            wordOne = input()
-            clear()
-            print("Write second word")
-            wordTwo = input()
 
-            addCard.addCard(owner.filip.decks[0].cards, wordOne, wordTwo)
+            print("Please choose an option below")
 
-        case 3:
+            print("1. Add new deck")
+            print("2. Add cards to existing deck")          
+            print("_____________________________")
+
+            selection = int(input("Select Option: "))
+
+            match selection:
+                case 1:
+                    break
+
+                case 2: #ADD CARD TO EXISTING DECK
+                    clear()
+                    #PRINTS ALL DECKS
+                    i = 1
+                    for deck in owner.filip.decks:
+                        print(f"{i}. {deck.name}")
+                        i+=1
+
+                    inpDeck = int(input("Enter number of deck to modify: "))
+
+                    clear()
+                    print("Write first word")
+                    wordOne = input()
+                    clear()
+                    print("Write second word")
+                    wordTwo = input()
+
+                    addCard.addCard(owner.filip.decks[inpDeck-1].cards, wordOne, wordTwo)
+                    writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+
+        case 3: #REMOVE CARD/DECK
+            ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL
+            
             clear()
 
             #PRINTS DECKS
@@ -72,13 +99,18 @@ while True:
 
                 i+=1
             print(      "_________________________________________________________________________")
-            inpCard = int(input("Type number of card to remove (type 'DELETE ALL' to delete entire deck): "))
+            inpCard = input("Type number of card to remove (type 'DELETE ALL' to delete entire deck): ")
 
-            removed = owner.filip.decks[inpDeck - 1].cards.pop(inpCard - 1)
-            print("Removed card: " + removed.wordOne + " / " + removed.wordTwo)
+            if inpCard == "DELETE ALL":
+                removed = owner.filip.decks.pop(inpDeck -1)
+                print(f"Removed deck {removed.name}")
+            else:
+                inpCard = int(inpCard)
+                removed = owner.filip.decks[inpDeck - 1].cards.pop(inpCard - 1)
+                print("Removed card: " + removed.wordOne + " / " + removed.wordTwo)
 
             writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
-            hold = input()
+            hold = input("Press enter to continue.. ")
 
         case 4:
             break

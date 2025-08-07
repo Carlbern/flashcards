@@ -13,4 +13,6 @@ class Deck:
 cards = cardClass.cards
 deck = Deck("test", cards)
 
+deck2 = Deck("deletas", cards)
+
 

@@ -6,5 +6,5 @@ class Owner:
         self.decks = decks
 
 franska = deckClass.deck
-decks = [deckClass.deck]
+decks = [deckClass.deck, deckClass.deck2]
 filip = Owner("Filip", decks)

@@ -7,7 +7,7 @@ import play
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')
-readFile.readFile(owner.filip.decks[0])
+readFile.readFile(owner.filip)
 
 while True:
     clear()
@@ -25,20 +25,19 @@ while True:
     match selection:
         case 1: #PLAY GAME
             clear()
-            i = 0
-            print("Decks:")
-            print("")
-            for decks in owner.filip.decks:
-                print(f"{i + 1}. {decks.name}")
 
-                i+=1
-                
+            #PRINTS DECKS
+            print("Decks: \n")
+            for i in range(0, len(owner.filip.decks)):
+                print(f"{i + 1}. {owner.decks[i].name}")
+
             print(          "_____________________________")
+
+            #CHOOSE AND PLAYS A DECK
             inp = int(input("Type number of deck to play: "))           
             play.play(owner.filip.decks[inp - 1]) 
-
-            
-            hold = input()
+ 
+            hold = input("Press enter to continue.. ")
         case 2: #ADD CARD
             clear()
 
@@ -73,7 +72,6 @@ while True:
 
                     addCard.addCard(owner.filip.decks[inpDeck-1].cards, wordOne, wordTwo)
                     writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
-
         case 3: #REMOVE CARD/DECK
             ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL
             
@@ -104,13 +102,15 @@ while True:
             if inpCard == "DELETE ALL":
                 removed = owner.filip.decks.pop(inpDeck -1)
                 print(f"Removed deck {removed.name}")
+                os.remove(f"./decks/{removed.name}.txt")
             else:
                 inpCard = int(inpCard)
                 removed = owner.filip.decks[inpDeck - 1].cards.pop(inpCard - 1)
                 print("Removed card: " + removed.wordOne + " / " + removed.wordTwo)
-
-            writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+                writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+            
             hold = input("Press enter to continue.. ")
-
         case 4:
+            clear()
+            print("Goodbye and thanks for playing")
             break

@@ -38,7 +38,7 @@ def play(deck):
                 asterisks+="*"
             i+=1
 
-        
+        #PLAYER GETS IT RIGHT
         if inp.lower() == card.wordTwo.lower():
             points += 1
             clear()
@@ -46,7 +46,7 @@ def play(deck):
             print(f"** {card.wordTwo} **")
             print(asterisks)
             hold = input("Press enter to continue.. ")
-        
+        #PLAYER GETS IT WRONG
         else:
             clear()
             print(Fore.RED + asterisks)
@@ -54,11 +54,9 @@ def play(deck):
             print(asterisks)
             hold = input("Press enter to continue.. ")
 
-
-
-
+        #GAME IS OVER
     clear()
-    print(Fore.WHITE + f"Game is over, you knew {points} answers")
+    print(Fore.WHITE + f"Game is over, you knew {points} out of {len(tempCards)} answers")
 
        
            

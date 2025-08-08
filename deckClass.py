@@ -1,18 +1,5 @@
-import cardClass
-
-
 #Define class Deck
 class Deck:
-    def __init__(self, name, card):
+    def __init__(self, name, cards):
         self.name = name
         self.cards = cards
-
-    
-
-#Creates cards and deck
-cards = cardClass.cards
-deck = Deck("test", cards)
-
-deck2 = Deck("deletas", cards)
-
-

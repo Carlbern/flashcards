@@ -17,7 +17,5 @@ def addDeck(owner, name):
     owner.decks.append(tempDeck)
 
 
-for card in deckClass.deck.cards:
-    print(card.wordOne + " | " + card.wordTwo)
 
 

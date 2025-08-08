@@ -5,8 +5,6 @@ class Card:
         self.played = False
     
 
-cards = []
-
 
 
 

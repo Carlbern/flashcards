@@ -1,5 +1,3 @@
-import deckClass
-
 class Owner:
      def __init__(self, name, decks):
         self.name = name

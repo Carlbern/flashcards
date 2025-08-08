@@ -1,9 +1,9 @@
 #THIS IS THE MAIN PROGRAM INDEX
-import addCard
-import writeToFile
-import owner
-import readFile
-import play
+import modules.addCard as addCard
+import modules.writeToFile as writeToFile
+import modules.owner as owner
+import modules.readFile as readFile
+import modules.play as play
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')

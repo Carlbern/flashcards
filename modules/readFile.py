@@ -1,8 +1,6 @@
-import cardClass
-import deckClass
+import modules.cardClass as cardClass
+import modules.deckClass as deckClass
 import os
-import owner
-
 
 def readFile(owner):
 

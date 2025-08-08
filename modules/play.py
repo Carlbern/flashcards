@@ -2,9 +2,7 @@ import random
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')
-
-
-     
+  
 def play(deck):
     points = 0
     tempCards = deck.cards.copy()

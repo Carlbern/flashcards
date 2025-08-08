@@ -70,7 +70,7 @@ while True:
                     print("Write second word")
                     wordTwo = input()
 
-                    addCard.addCard(owner.filip.decks[inpDeck-1].cards, wordOne, wordTwo)
+                    addCard.addCard(owner.filip.decks[inpDeck-1], wordOne, wordTwo)
                     writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
         case 3: #REMOVE CARD/DECK
             ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL

@@ -5,10 +5,10 @@ import appendFile
 
 
 
-def addCard(cards, wordOne, wordTwo):
+def addCard(deck, wordOne, wordTwo):
     tempCard = cardClass.Card(wordOne, wordTwo)
-    cards.append(tempCard)
-    appendFile.appendFile(wordOne, wordTwo)
+    deck.cards.append(tempCard)
+    appendFile.appendFile(deck, wordOne, wordTwo)
 
 def addDeck(owner, name):
     tempCards = []

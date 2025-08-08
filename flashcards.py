@@ -63,15 +63,25 @@ while True:
 
                     inpDeck = int(input("Enter number of deck to modify: "))
 
-                    clear()
-                    print("Write first word")
-                    wordOne = input()
-                    clear()
-                    print("Write second word")
-                    wordTwo = input()
+                    while(True):
+                        clear()
+                        print("Write first word")
+                        wordOne = input()
+                        clear()
+                        print("Write second word")
+                        wordTwo = input()
 
-                    addCard.addCard(owner.filip.decks[inpDeck-1], wordOne, wordTwo)
-                    writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+                        addCard.addCard(owner.filip.decks[inpDeck-1], wordOne, wordTwo)
+                        writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+
+                        clear()
+                        print("1. Add another card")
+                        print("2. Exit")
+                        selection = int(input("Select option: "))
+                        if(selection != 1):
+                            break
+
+                        
         case 3: #REMOVE CARD/DECK
             ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL
             

@@ -4,6 +4,7 @@ import modules.writeToFile as writeToFile
 import modules.owner as owner
 import modules.readFile as readFile
 import modules.play as play
+import modules.deckClass as deckClass
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')
@@ -21,7 +22,9 @@ while True:
     print("4.Exit programme")
     print("________________")
 
-    selection = int(input("Select option: "))
+    #Don't parse to int, will break the if wrong input is entered
+    selection = (input("Select option: "))
+   
     match selection:
         case 1: #PLAY GAME
             clear()
@@ -36,14 +39,14 @@ while True:
             #CHOOSE AND PLAYS A DECK
             inp = int(input("Type number of deck to play: "))           
             play.play(owner.filip.decks[inp - 1]) 
- 
+
             hold = input("Press enter to continue.. ")
         case 2: #ADD CARD
             clear()
 
             print("Please choose an option below")
 
-            print("1. Add new deck")
+            print("1. Add new deck (CURRENTLY BEING DEVELOPED)")
             print("2. Add cards to existing deck")          
             print("_____________________________")
 
@@ -51,8 +54,16 @@ while True:
 
             match selection:
                 case 1:
-                    break
-
+                    clear()
+                    #INPUTS NAME 
+                    inpName = input("Please enter name of new deck: ")
+                    #TEMP VERSIONS OF ARRAYS
+                    tempCards = []
+                    tempDeck = deckClass.Deck(inpName, tempCards)
+                    #APPEND TO OWNER
+                    owner.filip.decks.append(tempDeck)
+                    #WRITE FILE TO STORE CARDS
+                    writeToFile.writeToFile(tempDeck)
                 case 2: #ADD CARD TO EXISTING DECK
                     clear()
                     #PRINTS ALL DECKS
@@ -79,9 +90,7 @@ while True:
                         print("2. Exit")
                         selection = int(input("Select option: "))
                         if(selection != 1):
-                            break
-
-                        
+                            break         
         case 3: #REMOVE CARD/DECK
             ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL
             

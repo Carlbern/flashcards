@@ -1,4 +1,5 @@
 import random
+import modules.formatting as formatting
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')
@@ -9,17 +10,8 @@ def play(deck):
     random.shuffle(tempCards)
 
     for card in tempCards:
-
-        ##CREATES ASTERISKS FOR BORDER##
-        asterisks = ""
-        i = 0
-        while i < len(card.wordOne) + 6:
-            if i == 0 or i == (len(card.wordOne) + 5):
-                asterisks+=" "
-            else:
-                asterisks+="*"
-            i+=1
-                
+        asterisks = formatting.printCardBorder(card.wordOne)
+ 
         clear()
         print(Fore.WHITE + asterisks)
         print(f"** {card.wordOne} **")
@@ -27,14 +19,7 @@ def play(deck):
         inp = input("Guess: ")
 
         ##CREATES ASTERISKS FOR BORDER##
-        asterisks = ""
-        i = 0
-        while i < len(card.wordTwo) + 6:
-            if i == 0 or i == (len(card.wordTwo) + 5):
-                asterisks+=" "
-            else:
-                asterisks+="*"
-            i+=1
+        asterisks = formatting.printCardBorder(card.wordTwo)
 
         #PLAYER GETS IT RIGHT
         if inp.lower() == card.wordTwo.lower():

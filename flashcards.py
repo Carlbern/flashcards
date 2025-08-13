@@ -5,6 +5,8 @@ import modules.owner as owner
 import modules.readFile as readFile
 import modules.play as play
 import modules.deckClass as deckClass
+import modules.errorHandling as errorHandling
+import modules.formatting as formatting
 from colorama import Fore
 import os
 clear = lambda: os.system('clear')
@@ -22,8 +24,13 @@ while True:
     print("4.Exit programme")
     print("________________")
 
-    #Don't parse to int, will break the if wrong input is entered
+    
     selection = (input("Select option: "))
+    try:
+        selection = int(selection)
+    except:
+        #THE CODE COULDNT PARSE TO INT AND THUS RETURNS TO MAIN LOOP
+        clear()
    
     match selection:
         case 1: #PLAY GAME
@@ -50,8 +57,8 @@ while True:
             print("2. Add cards to existing deck")          
             print("_____________________________")
 
-            selection = int(input("Select Option: "))
-
+            selection = input("Select Option: ")
+            selection = errorHandling.trySelection(selection)
             match selection:
                 case 1:
                     clear()
@@ -66,14 +73,10 @@ while True:
                     writeToFile.writeToFile(tempDeck)
                 case 2: #ADD CARD TO EXISTING DECK
                     clear()
-                    #PRINTS ALL DECKS
-                    i = 1
-                    for deck in owner.filip.decks:
-                        print(f"{i}. {deck.name}")
-                        i+=1
-
+                    formatting.printDecks(owner.filip.decks)
                     inpDeck = int(input("Enter number of deck to modify: "))
 
+                    #ENTER VALUES OF NEW CARD
                     while(True):
                         clear()
                         print("Write first word")
@@ -81,47 +84,41 @@ while True:
                         clear()
                         print("Write second word")
                         wordTwo = input()
-
+                        #ADD NEW CARD TO SELECTED DECK
                         addCard.addCard(owner.filip.decks[inpDeck-1], wordOne, wordTwo)
                         writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
 
+                        #USER CHOOSES TO ADD ANOTHER CARD OR GO BACK TO MAIN MENU
                         clear()
                         print("1. Add another card")
                         print("2. Exit")
-                        selection = int(input("Select option: "))
-                        if(selection != 1):
-                            break         
-        case 3: #REMOVE CARD/DECK
-            ##NEED TO ADD FEATURE TO REMOVE ENTIRE DECKS STILL
-            
+                        selection = input("Select option: ")
+                        errorHandling.trySelection(selection)  
+        case 3: #REMOVE CARD/DECK        
             clear()
-
             #PRINTS DECKS
             print("Decks:")
             print("")
-            i = 0
-            for decks in owner.filip.decks:
-                print(f"{i + 1}. {decks.name}")
+            formatting.printDecks(owner.filip.decks)   
+            print("_____________________________")
 
-                i+=1
-                
-            print(          "_____________________________")
+            #USER SELECTS DECK
             inpDeck = int(input("Type number of deck to modify: "))   
 
-            #PRINTS CARDS IN DECK
-            i = 0
+            #PRINTS CARDS IN DECK       
             clear()
-            for card in owner.filip.decks[inpDeck - 1].cards:
-                print(f"{i + 1}. {card.wordOne} {card.wordTwo}")
+            formatting.printCards(owner.filip.decks[inpDeck - 1].cards)
+            print("_________________________________________________________________________")
 
-                i+=1
-            print(      "_________________________________________________________________________")
+            #USER SELECTS CARD
             inpCard = input("Type number of card to remove (type 'DELETE ALL' to delete entire deck): ")
 
+            #USER SELECTED TO DELETE ENTIRE DECK
             if inpCard == "DELETE ALL":
                 removed = owner.filip.decks.pop(inpDeck -1)
                 print(f"Removed deck {removed.name}")
                 os.remove(f"./decks/{removed.name}.txt")
+            #USER SELECTED TO REMOVED SPECIFIC CARD
             else:
                 inpCard = int(inpCard)
                 removed = owner.filip.decks[inpDeck - 1].cards.pop(inpCard - 1)

@@ -12,6 +12,7 @@ import os
 clear = lambda: os.system('clear')
 readFile.readFile(owner.filip)
 
+#MAIN GAME LOOP
 while True:
     clear()
 

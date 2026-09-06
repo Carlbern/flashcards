@@ -1,19 +1,26 @@
 #THIS IS THE MAIN PROGRAM INDEX
 import modules.addCard as addCard
-import modules.writeToFile as writeToFile
 import modules.owner as owner
 import modules.readFile as readFile
 import modules.play as play
 import modules.deckClass as deckClass
 import modules.errorHandling as errorHandling
 import modules.formatting as formatting
+import sqlite3
 from colorama import Fore
 import os
+
 clear = lambda: os.system('clear')
-readFile.readFile(owner.filip)
+#Loads in decks from database
+readFile.readFile(owner.owner1)
+
+#Database connection
+connection = sqlite3.connect("decks.db")
+cursor = connection.cursor()
 
 #MAIN GAME LOOP
 while True:
+    
     clear()
 
     print(Fore.WHITE + "Welcome to FlashCards!\n")
@@ -39,14 +46,14 @@ while True:
 
             #PRINTS DECKS
             print("Decks: \n")
-            for i in range(0, len(owner.filip.decks)):
-                print(f"{i + 1}. {owner.decks[i].name}")
+            for i in range(0, len(owner.owner1.decks)):
+                print(f"{i + 1}. {owner.decks[i].name} {owner.decks[i].id}")
 
             print(          "_____________________________")
 
             #CHOOSE AND PLAYS A DECK
             inp = int(input("Type number of deck to play: "))           
-            play.play(owner.filip.decks[inp - 1]) 
+            play.play(owner.owner1.decks[inp - 1]) 
 
             hold = input("Press enter to continue.. ")
         case 2: #ADD CARD
@@ -65,16 +72,24 @@ while True:
                     clear()
                     #INPUTS NAME 
                     inpName = input("Please enter name of new deck: ")
-                    #TEMP VERSIONS OF ARRAYS
-                    tempCards = []
-                    tempDeck = deckClass.Deck(inpName, tempCards)
-                    #APPEND TO OWNER
-                    owner.filip.decks.append(tempDeck)
-                    #WRITE FILE TO STORE CARDS
-                    writeToFile.writeToFile(tempDeck)
+
+                    clear()
+                    #INPUTS LANGUAGE
+                    inpLang = input("Please enter language to learn in deck")
+
+                    #WRITE TO DATABASE
+                    query = cursor.execute(f"INSERT INTO decks VALUES (NULL, {owner.owner1.id}, '{inpName}', '{inpLang}', 1500)")
+                    newID = cursor.lastrowid
+                    connection.commit()
+                    
+
+                    #ADD TO LOCAL LIST OF DECKS
+                    newDeck = deckClass.Deck(newID, tempDeck[0], inpName, [])
+                    owner.decks.append(newDeck)
+
                 case 2: #ADD CARD TO EXISTING DECK
                     clear()
-                    formatting.printDecks(owner.filip.decks)
+                    formatting.printDecks(owner.owner1.decks)
                     inpDeck = int(input("Enter number of deck to modify: "))
 
                     #ENTER VALUES OF NEW CARD
@@ -86,15 +101,24 @@ while True:
                         print("Write second word")
                         wordTwo = input()
                         #ADD NEW CARD TO SELECTED DECK
-                        addCard.addCard(owner.filip.decks[inpDeck-1], wordOne, wordTwo)
-                        writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
+                        addCard.addCard(owner.owner1.decks[inpDeck-1], wordOne, wordTwo)
 
+                        #ADD TO DATABASE
+                        cursor.execute(f"INSERT INTO cards VALUES (NULL, {owner.owner1.decks[inpDeck-1].id}, '{wordOne}', '{wordTwo}')")
+                        connection.commit()
                         #USER CHOOSES TO ADD ANOTHER CARD OR GO BACK TO MAIN MENU
                         clear()
                         print("1. Add another card")
                         print("2. Exit")
-                        selection = input("Select option: ")
+                        selection = input("Select option: ")    
                         errorHandling.trySelection(selection)  
+                        match selection:
+                            case 1:
+                                clear()
+                            case 2:
+                                break
+
+
         case 3: #REMOVE CARD/DECK        
             clear()
             #PRINTS DECKS
@@ -124,7 +148,6 @@ while True:
                 inpCard = int(inpCard)
                 removed = owner.filip.decks[inpDeck - 1].cards.pop(inpCard - 1)
                 print("Removed card: " + removed.wordOne + " / " + removed.wordTwo)
-                writeToFile.writeToFile(owner.filip.decks[inpDeck - 1])
             
             hold = input("Press enter to continue.. ")
         case 4:

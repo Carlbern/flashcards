@@ -1,31 +1,29 @@
-import modules.cardClass as cardClass
 import modules.deckClass as deckClass
-import os
+import modules.cardClass as cardClass
+import sqlite3
+
 
 def readFile(owner):
-
     
-    path = "./decks"
-    dir_list = os.listdir(path)
 
-    for i in range(0, len(dir_list)):
-        
+    connection = sqlite3.connect("decks.db")
+    cursor = connection.cursor()
+
+    query_decks = cursor.execute(f"SELECT * FROM decks WHERE owner_id = '{owner.id}'")
+    decks = query_decks.fetchall() 
+
+    print("zqdqzd")
+    for i in range(0, len(decks)):
+        query_cards = cursor.execute(f"SELECT * FROM cards WHERE deck_id = '{decks[i][0]}'")
+        cards = query_cards.fetchall()
+      
+
         tempCards = []
-        
-        file = open(f"{path}/{dir_list[i]}", "r")
-        for line in file:
-            line = line.strip() #Removes trailing whitespaces and newlines
-            lineWords = line.split("|")
-            tempCard = cardClass.Card(lineWords[0],lineWords[1])
-
+        for j in range(0, len(cards)):
+           
+            tempCard = cardClass.Card(cards[j][2], cards[j][3])
             tempCards.append(tempCard)
-            print("Added ", tempCard)
 
-        deckName = dir_list[i].removesuffix(".txt")
-        deck = deckClass.Deck(deckName, tempCards)
-
+        deck = deckClass.Deck(decks[i][0],decks[i][2], tempCards)
         owner.decks.append(deck)
-        print("Added deck: ", deck.name, "To ", owner.name)
-        file.close()
-
 

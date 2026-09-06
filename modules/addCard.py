@@ -5,7 +5,6 @@ import modules.appendFile as appendFile
 def addCard(deck, wordOne, wordTwo):
     tempCard = cardClass.Card(wordOne, wordTwo)
     deck.cards.append(tempCard)
-    appendFile.appendFile(deck, wordOne, wordTwo)
 
 def addDeck(owner, name):
     tempCards = []

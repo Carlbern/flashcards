@@ -1,7 +1,8 @@
 class Owner:
-     def __init__(self, name, decks):
+     def __init__(self, id, name, decks):
+        self.id = id
         self.name = name
         self.decks = decks
 
 decks = []
-filip = Owner("Filip", decks)
+owner1 = Owner(1, "1", decks)
